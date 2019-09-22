@@ -34,7 +34,7 @@ public class Swagger2Config
 
     private ApiInfo apiEndPointsInfo()
     {
-        return new ApiInfoBuilder().title("Java Spring Back End Starting Project")
+        return new ApiInfoBuilder().title("Java Spring International School API")
                                    .description("International School API using Java Spring")
                                    .contact(new Contact("Jonathan Scott", "http://www.lambdaschool.com", "jonathan.scott@gmail.com"))
                                    .license("MIT")

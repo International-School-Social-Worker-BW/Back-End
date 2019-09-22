@@ -45,6 +45,8 @@ public class StudentController
     @PostMapping(value = "/new", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewStudent(@Valid @RequestBody Student newStudent) throws URISyntaxException
     {
+        newStudent = studentService.save(newStudent);
+
         HttpHeaders responseHeaders = new HttpHeaders();
         URI newStudentURI = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{studentid}")
@@ -55,7 +57,7 @@ public class StudentController
     }
 
     // PUT localhost:2019/students/student/1
-    @PutMapping(value = "/student/{studentid")
+    @PutMapping(value = "/student/{studentid}")
     public ResponseEntity<?> updateStudent(@RequestBody Student updateStudent, @PathVariable long studentid)
     {
         studentService.update(updateStudent, studentid);
@@ -63,7 +65,7 @@ public class StudentController
     }
 
     // DELETE localhost:2019/students/student/1
-    @DeleteMapping(value = "/student/{studentid")
+    @DeleteMapping(value = "/student/{studentid}")
     public ResponseEntity<?> deleteStudentById(@PathVariable long studentid)
     {
         studentService.delete(studentid);

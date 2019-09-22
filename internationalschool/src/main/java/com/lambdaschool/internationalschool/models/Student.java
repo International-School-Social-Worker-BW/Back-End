@@ -32,7 +32,7 @@ public class Student
     private String criticalinfo;
     // TODO add picture storage
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "student")
     private List<Visits> visits = new ArrayList<>();
 

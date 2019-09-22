@@ -35,8 +35,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                          "/webjars/**",
                          "/createnewuser").permitAll()
             .antMatchers("/users/***", "/oauth/revoke-token").authenticated()
-            //                .antMatchers("/books", "/authors").hasAnyRole("ADMIN", "USER", "DATA") - application data
-            //                .antMatchers("/data/**").hasAnyRole("ADMIN", "DATA")
+            //                .antMatchers("/students/students").hasAnyRole("ADMIN", "USER", "DATA") - application data
+            //                .antMatchers("/students/**").hasAnyRole("ADMIN", "DATA")
             // .antMatchers("/users/***").hasAnyRole("USER")
             .antMatchers("/roles/**", "/actuator/**").hasAnyRole("ADMIN")
             .and()
