@@ -2,6 +2,7 @@ package com.lambdaschool.internationalschool.services;
 
 import com.lambdaschool.internationalschool.exceptions.ResourceNotFoundException;
 import com.lambdaschool.internationalschool.models.Student;
+import com.lambdaschool.internationalschool.models.Visit;
 import com.lambdaschool.internationalschool.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,6 +94,13 @@ public class StudentServiceImpl implements StudentService
             currentStudent.setCriticalinfo(student.getCriticalinfo());
         }
         // TODO add visits to update
+        if (student.getVisits().size() > 0)
+        {
+            for (Visit v : student.getVisits())
+            {
+                currentStudent.getVisits().add(new Visit(v.getVisits(), v.getStudent(), v.getUser()));
+            }
+        }
         return studentRepository.save(currentStudent);
     }
 

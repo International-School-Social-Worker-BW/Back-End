@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "visits")
-public class Visits
+public class Visit
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,14 +19,20 @@ public class Visits
     @JsonIgnoreProperties("visits")
     private Student student;
 
-    public Visits()
+    @ManyToOne
+    @JoinColumn(name = "userid")
+    @JsonIgnoreProperties("visits")
+    private  User user;
+
+    public Visit()
     {
     }
 
-    public Visits(Date visits, Student student)
+    public Visit(Date visits, Student student, User user)
     {
         this.visits = visits;
         this.student = student;
+        this.user = user;
     }
 
     public long getVisitid()
@@ -57,5 +63,15 @@ public class Visits
     public void setStudent(Student student)
     {
         this.student = student;
+    }
+
+    public User getUser()
+    {
+        return user;
+    }
+
+    public void setUser(User user)
+    {
+        this.user = user;
     }
 }

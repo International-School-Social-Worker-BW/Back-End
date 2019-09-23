@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -34,7 +33,7 @@ public class Student
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties(value = "student")
-    private List<Visits> visits = new ArrayList<>();
+    private List<Visit> visits = new ArrayList<>();
 
     public Student()
     {
@@ -206,5 +205,15 @@ public class Student
     public void setCriticalinfo(String criticalinfo)
     {
         this.criticalinfo = criticalinfo;
+    }
+
+    public List<Visit> getVisits()
+    {
+        return visits;
+    }
+
+    public void setVisits(List<Visit> visits)
+    {
+        this.visits = visits;
     }
 }

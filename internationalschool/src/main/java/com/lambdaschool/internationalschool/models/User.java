@@ -34,23 +34,28 @@ public class User extends Auditable
     @Column(nullable = false)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+    private String organization;
 
     @OneToMany(mappedBy = "user",
                cascade = CascadeType.ALL)
     @JsonIgnoreProperties("user")
     private List<UserRoles> userroles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Visit> visits = new ArrayList<>();
+
     public User()
     {
     }
 
-    public User(String userfirstname, String userlastname, String useremail, String userphone, String password, List<UserRoles> userRoles)
+    public User(String userfirstname, String userlastname, String useremail, String userphone, String password, String organization, List<UserRoles> userRoles)
     {
         this.userfirstname = userfirstname;
         this.userlastname = userlastname;
         this.userphone = userphone;
         setUseremail(useremail);
         setPassword(password);
+        this.organization = organization;
         for (UserRoles ur : userRoles)
         {
             ur.setUser(this);
@@ -124,6 +129,16 @@ public class User extends Auditable
         this.password = password;
     }
 
+    public String getOrganization()
+    {
+        return organization;
+    }
+
+    public void setOrganization(String organization)
+    {
+        this.organization = organization;
+    }
+
     public List<UserRoles> getUserroles()
     {
         return userroles;
@@ -132,6 +147,16 @@ public class User extends Auditable
     public void setUserroles(List<UserRoles> userroles)
     {
         this.userroles = userroles;
+    }
+
+    public List<Visit> getVisits()
+    {
+        return visits;
+    }
+
+    public void setVisits(List<Visit> visits)
+    {
+        this.visits = visits;
     }
 
     public List<SimpleGrantedAuthority> getAuthority()
