@@ -5,6 +5,7 @@ import com.lambdaschool.internationalschool.models.Student;
 import com.lambdaschool.internationalschool.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,14 @@ public class StudentServiceImpl implements StudentService
                 .orElseThrow(() -> new ResourceNotFoundException("Student ID " + id + " not found" ));
     }
 
+    @Transactional
     @Override
     public Student save(Student student)
     {
         return studentRepository.save(student);
     }
 
+    @Transactional
     @Override
     public Student update(Student student, long id)
     {
@@ -93,6 +96,7 @@ public class StudentServiceImpl implements StudentService
         return studentRepository.save(currentStudent);
     }
 
+    @Transactional
     @Override
     public void delete(long id)
     {

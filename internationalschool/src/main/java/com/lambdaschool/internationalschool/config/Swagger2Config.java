@@ -37,8 +37,6 @@ public class Swagger2Config
         return new ApiInfoBuilder().title("Java Spring International School API")
                                    .description("International School API using Java Spring")
                                    .contact(new Contact("Jonathan Scott", "http://www.lambdaschool.com", "jonathan.scott@gmail.com"))
-                                   .license("MIT")
-                                   .licenseUrl("https://github.com/lambdaschool/java-internationalschool/blob/master/LICENSE")
                                    .version("1.0.0")
                                    .build();
     }
