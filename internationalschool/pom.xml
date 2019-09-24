@@ -12,7 +12,7 @@
     <artifactId>internationalschool</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>International School</name>
-    <description>Internation School project for Spring Boot</description>
+    <description>International School project for Spring Boot</description>
 
     <properties>
         <java.version>11</java.version>

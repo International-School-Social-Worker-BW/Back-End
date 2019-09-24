@@ -1,6 +1,7 @@
 package com.lambdaschool.internationalschool.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -35,10 +36,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter
                          "/webjars/**",
                          "/createnewuser").permitAll()
             .antMatchers("/users/***", "/oauth/revoke-token").authenticated()
-            //                .antMatchers("/students/students").hasAnyRole("ADMIN", "USER", "DATA") - application data
-            //                .antMatchers("/students/**").hasAnyRole("ADMIN", "DATA")
-            // .antMatchers("/users/***").hasAnyRole("USER")
-            .antMatchers("/roles/**", "/actuator/**").hasAnyRole("ADMIN")
+                            .antMatchers("/students/students", "/visits/**").hasAnyRole("ADMIN", "USER")
+                            .antMatchers(HttpMethod.GET, "/students/student/**").hasAnyRole("ADMIN","USER")
+            .antMatchers("/roles/**", "/actuator/**", "students/new").hasAnyRole("ADMIN")
             .and()
             .exceptionHandling()
             .accessDeniedHandler(new OAuth2AccessDeniedHandler());

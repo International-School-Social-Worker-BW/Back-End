@@ -35,17 +35,15 @@ public class SeedData implements CommandLineRunner
     {
         Role r1 = new Role("admin");
         Role r2 = new Role("user");
-//        Role r3 = new Role("data");
 
         roleService.save(r1);
         roleService.save(r2);
-//        roleService.save(r3);
 
         // admin, data, user
         ArrayList<UserRoles> admins = new ArrayList<>();
         admins.add(new UserRoles(new User(), r1));
         admins.add(new UserRoles(new User(), r2));
-//        admins.add(new UserRoles(new User(), r3));
+
         User u1 = new User("jon", "scott", "jon@jon.com", "123-456-7890", "password", "School 1", admins);
         Student s1 = new Student("Anna", "Smith", 8, 3, "current", true, true, false, "Marie Smith", "Mother", "4444444444", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
         userService.save(u1);
@@ -60,10 +58,9 @@ public class SeedData implements CommandLineRunner
 //        u1.getVisits().add(v1);
 
         // data, user
-//        ArrayList<UserRoles> datas = new ArrayList<>();
         ArrayList<UserRoles> users = new ArrayList<>();
         users.add(new UserRoles(new User(), r2));
-//        users.add(new UserRoles(new User(), r3));
+
         User u2 = new User("bob", "roberts", "bob@bob.com", "098-765-4321", "password", "School 1", users);
         userService.save(u2);
 
