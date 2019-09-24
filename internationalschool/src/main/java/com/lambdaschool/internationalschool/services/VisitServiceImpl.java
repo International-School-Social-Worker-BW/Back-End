@@ -35,7 +35,7 @@ public class VisitServiceImpl implements VisitService
     public Visit save(Visit visit, long studentid, long userid)
     {
         Student currentStudent = studentRepository.findById(studentid).orElseThrow(() -> new ResourceNotFoundException("Student ID " + studentid + " not found" ));
-        User currentUser = userRepository.findById(userid).orElseThrow(() -> new ResourceNotFoundException("Student ID " + studentid + " not found" ));
+        User currentUser = userRepository.findById(userid).orElseThrow(() -> new ResourceNotFoundException("User ID " + studentid + " not found" ));
         Visit newvisit = new Visit(new Date(), currentStudent, currentUser);
 
         return visitRepository.save(newvisit);
