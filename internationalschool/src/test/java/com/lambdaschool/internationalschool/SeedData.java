@@ -1,88 +1,94 @@
-//package com.lambdaschool.internationalschool;
-//
-//import com.lambdaschool.internationalschool.models.Role;
-//import com.lambdaschool.internationalschool.models.User;
-//import com.lambdaschool.internationalschool.models.UserRoles;
-//import com.lambdaschool.internationalschool.services.RoleService;
-//import com.lambdaschool.internationalschool.services.UserService;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.stereotype.Component;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import java.util.ArrayList;
-//
-//@Transactional
-//@Component
-//public class SeedData implements CommandLineRunner
-//{
-//    @Autowired
-//    RoleService roleService;
-//
-//    @Autowired
-//    UserService userService;
-//
-//
-//    @Override
-//    public void run(String[] args) throws Exception
-//    {
-//        Role r1 = new Role("admin");
-//        Role r2 = new Role("user");
-//        Role r3 = new Role("data");
-//
-//        roleService.save(r1);
-//        roleService.save(r2);
-//        roleService.save(r3);
-//
-//        // admin, data, user
-//        ArrayList<UserRoles> admins = new ArrayList<>();
-//        admins.add(new UserRoles(new User(), r1));
-//        admins.add(new UserRoles(new User(), r2));
-//        admins.add(new UserRoles(new User(), r3));
-//        User u1 = new User("admin", "ILuvM4th!", admins);
-//        u1.getUseremails()
-//          .add(new Useremail(u1, "admin@email.local"));
-//        u1.getUseremails()
-//          .add(new Useremail(u1, "admin@mymail.local"));
-//        u1 = userService.save(u1);
-//
-//        // data, user
-//        ArrayList<UserRoles> datas = new ArrayList<>();
-//        datas.add(new UserRoles(new User(), r3));
-//        datas.add(new UserRoles(new User(), r2));
-//        User u2 = new User("cinnamon", "1234567", datas);
-//        u2.getUseremails()
-//          .add(new Useremail(u2, "cinnamon@mymail.local"));
-//        u2.getUseremails()
-//          .add(new Useremail(u2, "hops@mymail.local"));
-//        u2.getUseremails()
-//          .add(new Useremail(u2, "bunny@email.local"));
-//        u2 = userService.save(u2);
-//
-//        // user
-//        ArrayList<UserRoles> users = new ArrayList<>();
-//        users.add(new UserRoles(new User(), r1));
-//        User u3 = new User("testbarn", "ILuvM4th!", users);
-//        u3.getUseremails()
-//          .add(new Useremail(u3, "barnbarn@email.local"));
-//        u3 = userService.save(u3);
-//
-//        users = new ArrayList<>();
-//        users.add(new UserRoles(new User(), r2));
-//        User u4 = new User("testcat", "password", users);
-//        u4 = userService.save(u4);
-//
-//        users = new ArrayList<>();
-//        users.add(new UserRoles(new User(), r2));
-//        User u5 = new User("testdog", "password", users);
-//        u5 = userService.save(u5);
-//
-//        System.out.println("\n*** Seed Data ***");
-//        System.out.println(u1);
-//        System.out.println(u2);
-//        System.out.println(u3);
-//        System.out.println(u4);
-//        System.out.println(u5);
-//        System.out.println("*** Seed Data ***\n");
-//    }
-//}
+package com.lambdaschool.internationalschool;
+
+import com.lambdaschool.internationalschool.models.Role;
+import com.lambdaschool.internationalschool.models.Student;
+import com.lambdaschool.internationalschool.models.User;
+import com.lambdaschool.internationalschool.models.UserRoles;
+import com.lambdaschool.internationalschool.services.RoleService;
+import com.lambdaschool.internationalschool.services.StudentService;
+import com.lambdaschool.internationalschool.services.UserService;
+import com.lambdaschool.internationalschool.services.VisitService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+
+@Transactional
+@Component
+public class SeedData implements CommandLineRunner
+{
+    @Autowired
+    RoleService roleService;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    StudentService studentService;
+
+    @Autowired
+    VisitService visitService;
+
+
+    @Override
+    public void run(String[] args) throws Exception
+    {
+        Role r1 = new Role("admin");
+        Role r2 = new Role("user");
+
+        roleService.save(r1);
+        roleService.save(r2);
+
+        // admin, data, user
+        ArrayList<UserRoles> admins = new ArrayList<>();
+        admins.add(new UserRoles(new User(), r1));
+        admins.add(new UserRoles(new User(), r2));
+
+        User u1 = new User("jon", "scott", "jon@jon.com", "123-456-7890", "password", "School 1", admins);
+        Student s1 = new Student("Anna", "Smith", 8, 3, "current", true, true, false, "Marie Smith", "Mother", "4444444444", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
+        userService.save(u1);
+        studentService.save(s1);
+        //        Visit v1 = new Visit(new Date(),s1, u1);
+        //        s1.setStudentid(4);
+        //        studentService.update(s1);
+        //        u1.setUserid(4);
+        //        userService.update(u1);
+        //        visitService.save(v1, 4, 4);
+        //        s1.getVisits().add(v1);
+        //        u1.getVisits().add(v1);
+
+        // data, user
+        ArrayList<UserRoles> users = new ArrayList<>();
+        users.add(new UserRoles(new User(), r2));
+
+        User u2 = new User("bob", "roberts", "bob@bob.com", "098-765-4321", "password", "School 1", users);
+        userService.save(u2);
+
+        // user
+        users = new ArrayList<>();
+        users.add(new UserRoles(new User(), r2));
+        User u3 = new User("ashley", "smith", "ash@ash.com", "111-111-1111", "qwerty", "School 1", users);
+        userService.save(u3);
+
+        users = new ArrayList<>();
+        users.add(new UserRoles(new User(), r2));
+        User u4 = new User("tom", "jones", "tom@tom.com", "222-222-2222", "password", "School 1", users);
+        userService.save(u4);
+
+        users = new ArrayList<>();
+        users.add(new UserRoles(new User(), r2));
+        User u5 = new User("jane", "doe", "jane@jane.com", "333-333-3333", "password", "School 1", users);
+        userService.save(u5);
+
+        System.out.println("\n*** Seed Data ***");
+        System.out.println(u1);
+        System.out.println(u2);
+        System.out.println(u3);
+        System.out.println(u4);
+        System.out.println(u5);
+        System.out.println(s1);
+        System.out.println("*** Seed Data ***\n");
+    }
+}

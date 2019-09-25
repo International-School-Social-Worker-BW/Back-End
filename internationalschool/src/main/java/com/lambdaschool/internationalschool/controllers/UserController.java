@@ -57,19 +57,19 @@ public class UserController
     }
 
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    @GetMapping(value = "/user/name/{userEmail}",
-                produces = {"application/json"})
-    public ResponseEntity<?> getUserByName(HttpServletRequest request,
-                                           @PathVariable
-                                                   String userEmail)
-    {
-        logger.trace(request.getMethod()
-                            .toUpperCase() + " " + request.getRequestURI() + " accessed");
-
-        User u = userService.findByEmail(userEmail);
-        return new ResponseEntity<>(u, HttpStatus.OK);
-    }
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @GetMapping(value = "/user/name/{userEmail}",
+//                produces = {"application/json"})
+//    public ResponseEntity<?> getUserByName(HttpServletRequest request,
+//                                           @PathVariable
+//                                                   String userEmail)
+//    {
+//        logger.trace(request.getMethod()
+//                            .toUpperCase() + " " + request.getRequestURI() + " accessed");
+//
+//        User u = userService.findByEmail(userEmail);
+//        return new ResponseEntity<>(u, HttpStatus.OK);
+//    }
 
 
     @GetMapping(value = "/getcurrentuser",

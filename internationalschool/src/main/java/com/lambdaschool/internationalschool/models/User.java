@@ -174,9 +174,9 @@ public class User extends Auditable
         return rtnList;
     }
 
-//    @Override
-//    public String toString()
-//    {
-//        return "User{" + "userid=" + userid + ", username='" + username + '\'' + ", password='" + password + '\'' + ", userRoles=" + userroles + ", useremails=" + useremails + '}';
-//    }
+    @Override
+    public String toString()
+    {
+        return "User{" + "userid=" + userid + ", userfirstname='" + userfirstname + '\'' + ", userlastname='" + userlastname + '\'' + ", useremail='" + useremail + '\'' + ", userphone='" + userphone + '\'' + ", password='" + password + '\'' + ", organization='" + organization + '\'' + ", userroles=" + userroles + ", visits=" + visits + '}';
+    }
 }

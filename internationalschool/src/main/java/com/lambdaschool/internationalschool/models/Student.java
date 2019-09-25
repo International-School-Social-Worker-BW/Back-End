@@ -216,4 +216,10 @@ public class Student
     {
         this.visits = visits;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Student{" + "studentid=" + studentid + ", studentfirstname='" + studentfirstname + '\'' + ", studentlastname='" + studentlastname + '\'' + ", age=" + age + ", grade=" + grade + ", status='" + status + '\'' + ", birthcertificate=" + birthcertificate + ", insurance=" + insurance + ", specialneeds=" + specialneeds + ", contactname='" + contactname + '\'' + ", relationship='" + relationship + '\'' + ", contactphone='" + contactphone + '\'' + ", contactemail='" + contactemail + '\'' + ", backgroundinfo='" + backgroundinfo + '\'' + ", criticalinfo='" + criticalinfo + '\'' + ", visits=" + visits + '}';
+    }
 }
