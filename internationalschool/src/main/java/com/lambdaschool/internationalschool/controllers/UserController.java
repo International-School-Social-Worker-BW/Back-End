@@ -72,15 +72,16 @@ public class UserController
     }
 
 
-    @GetMapping(value = "/getusername",
+    @GetMapping(value = "/getcurrentuser",
                 produces = {"application/json"})
     @ResponseBody
     public ResponseEntity<?> getCurrentUserName(HttpServletRequest request, Authentication authentication)
     {
         logger.trace(request.getMethod()
                             .toUpperCase() + " " + request.getRequestURI() + " accessed");
+        User currentUser = userService.findByEmail(authentication.getName());
 
-        return new ResponseEntity<>(authentication.getPrincipal(), HttpStatus.OK);
+        return new ResponseEntity<>(currentUser, HttpStatus.OK);
     }
 
 
@@ -153,7 +154,7 @@ public class UserController
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+//    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping("/user/{userid}/role/{roleid}")
     public ResponseEntity<?> postUserRoleByIds(HttpServletRequest request,
                                                @PathVariable
