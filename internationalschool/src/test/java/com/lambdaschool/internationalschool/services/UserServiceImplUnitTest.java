@@ -82,7 +82,7 @@ public class UserServiceImplUnitTest
     @Test
     public void D_delete()
     {
-        userService.delete(8);
+        userService.delete(7);
         assertEquals(4, userService.findAll().size());
     }
 
@@ -120,30 +120,30 @@ public class UserServiceImplUnitTest
         assertEquals("tiger@tiger.local", saveU2.getUseremail());
     }
 
-//    @Test (expected = ResourceFoundException.class)
-//    public void FA_saveResourceFound()
-//    {
-//        ArrayList<UserRoles> datas = new ArrayList<>();
-//        User u2 = new User("cinnamon", "suger", "tiger@tiger.local", "5555555555", "ILuvMath!", "A Cereal Bowl", datas);
-//
-//        User saveU2 = userService.save(u2);
-//
-//        System.out.println("*** DATA ***");
-//        System.out.println(saveU2);
-//        System.out.println("*** DATA ***");
-//
-//        assertEquals("tiger@tiger.local", saveU2.getUseremail());
-//    }
+    @Test (expected = ResourceFoundException.class)
+    public void FA_saveResourceFound()
+    {
+        ArrayList<UserRoles> datas = new ArrayList<>();
+        User u2 = new User("cinnamon", "suger", "jon@jon.com", "5555555555", "ILuvMath!", "A Cereal Bowl", datas);
+
+        User saveU2 = userService.save(u2);
+
+        System.out.println("*** DATA ***");
+        System.out.println(saveU2);
+        System.out.println("*** DATA ***");
+
+        assertEquals("jon@jon.com", saveU2.getUseremail());
+    }
 
     @Transactional
-    @WithUserDetails("bunny@email.thump")
+    @WithUserDetails("jon@jon.com")
     @Test
     public void G_update()
     {
         ArrayList<UserRoles> datas = new ArrayList<>();
         User u2 = new User("cinnamon", "sugar", "bunny@email.thump", "5555555555", "ILuvMath!", "A Cereal Bowl", datas);
 
-        User updatedu2 = userService.update(u2, 7, true);
+        User updatedu2 = userService.update(u2, 3, true);
 
         System.out.println("*** DATA ***");
         System.out.println(updatedu2);
@@ -153,7 +153,7 @@ public class UserServiceImplUnitTest
     }
 
     @Transactional
-    @WithUserDetails("rabbit@email.thump")
+    @WithUserDetails("jon@jon.com")
     @Test (expected = ResourceFoundException.class)
     public void GA_updateWithUserRole()
     {
@@ -163,7 +163,7 @@ public class UserServiceImplUnitTest
         User u2 = new User("cinnamon", "suger", "rabbit@email.thump", "5555555555", "ILuvMath!", "A Cereal Bowl", datas);
         datas.add(new UserRoles(u2, r2));
 
-        User updatedu2 = userService.update(u2, 4, false);
+        User updatedu2 = userService.update(u2, 3, false);
 
         System.out.println("*** DATA ***");
         System.out.println(updatedu2);
@@ -221,7 +221,7 @@ public class UserServiceImplUnitTest
     @Test
     public void IB_deleteUserRole()
     {
-        userService.deleteUserRole(7, 2);
+        userService.deleteUserRole(6, 2);
     }
 
     @Test(expected = ResourceNotFoundException.class)
@@ -239,6 +239,6 @@ public class UserServiceImplUnitTest
     @Test
     public void IE_addUserRole()
     {
-        userService.addUserRole(7, 1);
+        userService.addUserRole(6, 1);
     }
 }

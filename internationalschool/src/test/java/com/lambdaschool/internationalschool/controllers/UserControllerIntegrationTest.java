@@ -95,7 +95,7 @@ public class UserControllerIntegrationTest
         this.mockMvc.perform(get("/users/user/{userid}", 7))
                     .andDo(print())
                     .andExpect(status().isOk())
-                    .andExpect(content().string(containsString("tom@tom.com")));
+                    .andExpect(content().string(containsString("jane@jane.com")));
     }
 
     @WithUserDetails("jon@jon.com")

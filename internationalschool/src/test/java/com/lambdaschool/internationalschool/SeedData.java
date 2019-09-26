@@ -1,9 +1,6 @@
 package com.lambdaschool.internationalschool;
 
-import com.lambdaschool.internationalschool.models.Role;
-import com.lambdaschool.internationalschool.models.Student;
-import com.lambdaschool.internationalschool.models.User;
-import com.lambdaschool.internationalschool.models.UserRoles;
+import com.lambdaschool.internationalschool.models.*;
 import com.lambdaschool.internationalschool.services.RoleService;
 import com.lambdaschool.internationalschool.services.StudentService;
 import com.lambdaschool.internationalschool.services.UserService;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Transactional
 @Component
@@ -47,17 +45,9 @@ public class SeedData implements CommandLineRunner
         admins.add(new UserRoles(new User(), r2));
 
         User u1 = new User("jon", "scott", "jon@jon.com", "123-456-7890", "password", "School 1", admins);
-        Student s1 = new Student("Anna", "Smith", 8, 3, "current", true, true, false, "Marie Smith", "Mother", "4444444444", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
-        userService.save(u1);
-        studentService.save(s1);
-        //        Visit v1 = new Visit(new Date(),s1, u1);
-        //        s1.setStudentid(4);
-        //        studentService.update(s1);
-        //        u1.setUserid(4);
-        //        userService.update(u1);
-        //        visitService.save(v1, 4, 4);
-        //        s1.getVisits().add(v1);
-        //        u1.getVisits().add(v1);
+        User savedU1 = userService.save(u1);
+
+        //
 
         // data, user
         ArrayList<UserRoles> users = new ArrayList<>();
@@ -81,6 +71,17 @@ public class SeedData implements CommandLineRunner
         users.add(new UserRoles(new User(), r2));
         User u5 = new User("jane", "doe", "jane@jane.com", "333-333-3333", "password", "School 1", users);
         userService.save(u5);
+
+
+        //        Student s1 = new Student("Anna", "Smith", 8, 3, "current", true, true, false, "Marie Smith", "Mother", "4444444444", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
+        Student s1 = new Student("Anna", "Smith", 8, 3, "current", true, true, false, "Marie Smith", "Mother", "3333333333", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
+        Student s2 = new Student("Brandon", "Kelly", 8, 3, "current", true, true, false, "Hank Kelly", "Father", "4444444444", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
+        Student s3 = new Student("Abby", "Taylor", 6, 1, "current", true, true, false, "Tammy Taylor", "Mother", "1234567890", "'marie@marie.com", "'Truth is dead,' says Marx. The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feetemerges again in The Moor’s Last Sigh, although in a more mythopoeticalsense.", "Hubbard[1] suggests that we have to choose between neostructural discourse and the textual paradigm of reality. In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
+        Student savedS1 = studentService.save(s1);
+        Student savedS2 = studentService.save(s2);
+        Student savedS3 = studentService.save(s3);
+        Visit v1 = new Visit(new Date(),savedS1, savedU1);
+        visitService.save(v1, savedS1.getStudentid(), savedU1.getUserid());
 
         System.out.println("\n*** Seed Data ***");
         System.out.println(u1);
