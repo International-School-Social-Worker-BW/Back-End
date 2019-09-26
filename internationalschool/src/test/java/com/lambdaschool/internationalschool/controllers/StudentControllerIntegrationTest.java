@@ -111,13 +111,24 @@ public class StudentControllerIntegrationTest
     public void D_addNewStudent() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.post("/students/new")
-                .content("{\"userfirstname\": \"Ginger\", \"studentfirstname\": \"Roger\", \"studentlasstname\": \"Rogers\", \"age\": 10, \"grade\": 3, \"status\": \"current\", \"birthcertificate\": true, \"insurance\": true, \"specialneeds\": false, \"contactname\": \"Ronda Rodgers\", \"relationship\": \"Mother\", \"contactphone\": \"3333333333\", \"contactemail\": \"'marie@marie.com\", \"backgroundinfo\": \"'The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feet.\", \"criticalinfo\": \"In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.\"}")
+                .content("{\"studentfirstname\": \"Roger\", \"studentlasstname\": \"Rogers\", \"age\": 10, \"grade\": 3, \"status\": \"current\", \"birthcertificate\": true, \"insurance\": true, \"specialneeds\": false, \"contactname\": \"Ronda Rodgers\", \"relationship\": \"Mother\", \"contactphone\": \"3333333333\", \"contactemail\": \"'marie@marie.com\", \"backgroundinfo\": \"'The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feet.\", \"criticalinfo\": \"In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(MockMvcResultMatchers.header()
                         .exists("location"));
+    }
+    @WithUserDetails("ash@ash.com")
+    @Test
+    public void DA_addNewStudentNotAuthorized() throws Exception
+    {
+        mockMvc.perform(MockMvcRequestBuilders.post("/students/new")
+                .content("{\"studentfirstname\": \"Roger\", \"studentlasstname\": \"Rodney\", \"age\": 10, \"grade\": 3, \"status\": \"current\", \"birthcertificate\": true, \"insurance\": true, \"specialneeds\": false, \"contactname\": \"Ronda Rodgers\", \"relationship\": \"Mother\", \"contactphone\": \"3333333333\", \"contactemail\": \"'marie@marie.com\", \"backgroundinfo\": \"'The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feet.\", \"criticalinfo\": \"In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
     }
 
     @WithUserDetails("jon@jon.com")
@@ -131,9 +142,18 @@ public class StudentControllerIntegrationTest
 
     @WithUserDetails("jon@jon.com")
     @Test
-    public void E_deleteStudentByIdNotFound() throws Exception
+    public void EA_deleteStudentByIdNotFound() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.delete("/students/student/{studentid}", 100))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @WithUserDetails("ash@ash.com")
+    @Test
+    public void EB_deleteStudentById() throws Exception
+    {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/students/student/{studentid}", 10))
                 .andDo(print())
                 .andExpect(status().is4xxClientError());
     }
@@ -152,9 +172,21 @@ public class StudentControllerIntegrationTest
 
     @WithUserDetails("jon@jon.com")
     @Test
-    public void H_UpdateStudentNotFound() throws Exception
+    public void HA_UpdateStudentNotFound() throws Exception
     {
         mockMvc.perform(MockMvcRequestBuilders.put("/students/student/{studentid}", 100)
+                .content("{\"contactphone\": \"3333333333\"}")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().is4xxClientError());
+    }
+
+    @WithUserDetails("ash@ash.com")
+    @Test
+    public void HB_UpdateStudentNotAuthorized() throws Exception
+    {
+        mockMvc.perform(MockMvcRequestBuilders.put("/students/student/{studentid}", 8)
                 .content("{\"contactphone\": \"3333333333\"}")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
