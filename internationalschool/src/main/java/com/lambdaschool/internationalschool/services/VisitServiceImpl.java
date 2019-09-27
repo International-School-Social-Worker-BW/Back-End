@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,7 +28,9 @@ public class VisitServiceImpl implements VisitService
     @Override
     public List<Visit> findAll()
     {
-        return null;
+        List<Visit> list = new ArrayList<>();
+        visitRepository.findAll().iterator().forEachRemaining(list::add);
+        return list;
     }
 
     @Transactional
@@ -45,13 +48,9 @@ public class VisitServiceImpl implements VisitService
     @Override
     public void delete(long id)
     {
-
+        visitRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Visit ID " + id + " not found" ));
+        visitRepository.deleteById(id);
     }
 
-    @Transactional
-    @Override
-    public Visit update(Visit visit)
-    {
-        return null;
-    }
 }

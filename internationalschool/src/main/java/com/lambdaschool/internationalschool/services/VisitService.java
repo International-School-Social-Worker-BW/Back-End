@@ -12,5 +12,4 @@ public interface VisitService
 
     void delete(long id);
 
-    Visit update(Visit visit);
 }
