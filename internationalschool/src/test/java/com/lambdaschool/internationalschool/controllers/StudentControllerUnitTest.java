@@ -1,9 +1,10 @@
-package com.lambdaschool.internationalschool.services;
+package com.lambdaschool.internationalschool.controllers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.lambdaschool.internationalschool.controllers.StudentController;
 import com.lambdaschool.internationalschool.models.Student;
+import com.lambdaschool.internationalschool.services.StudentService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

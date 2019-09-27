@@ -32,4 +32,12 @@ public class VisitsController
         visitService.save(visit, studentid, userid);
         return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
+
+    // POST localhost:2019/visits/student/{studentid}/user/{userid}
+    @DeleteMapping(value = "visit/{visitid}")
+    public ResponseEntity<?> deleteVisit(@PathVariable long visitid)
+    {
+        visitService.delete(visitid);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

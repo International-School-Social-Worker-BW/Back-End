@@ -63,7 +63,10 @@ public class StudentServiceImplTest
     @Test
     public void D_update()
     {
-        Student s2 = new Student("George", "Jones", 7, 2, "current", true, true, false, "Tom Jones", "Father", "4444444444", "'marie@marie.com", "'The rubicon, and hence the failure, of neocultural nihilism prevalent in Rushdie’s The Ground Beneath Her Feet", "In a sense, thesubject is interpolated into a Lyotardist narrative that includes art as a reality.");
+        Student s2 = new Student();
+        s2.setStudentfirstname("Banana");
+        Student saveS2 = studentService.update(s2, 8);
+        assertEquals("Banana", saveS2.getStudentfirstname());
 
     }
 
